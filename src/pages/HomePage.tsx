@@ -1,11 +1,12 @@
 import { motion } from "framer-motion";
 import Header from "../components/common/Header";
 import StatCard from "../components/common/StatCard";
-import SalesOverviewChart from "../components/home/SalesOverviewChart"
 import { BarChart2, ShoppingBag, Users, Zap } from "lucide-react";
 import { StatsCard } from "../shared-types";
-import CategoryDistributionChart from "../components/home/CategoryDistributionChart";
-import SalesChannelChart from "../components/home/SalesChannelChart";
+import MonthChart from "../components/charts/MonthChart";
+import SalesChart from "../components/charts/SalesChart";
+import PieGraph from "../components/charts/PieGraph";
+import { salesData, categoryData, salesChartsInfo } from "../data/HomePageChartsData"
 
 const STATS_CARD: StatsCard[] = [
   { name: "Total Sales", icon: Zap, value: "$12,345", color: "#6366F1" },
@@ -51,9 +52,9 @@ const HomePage = () => {
         {/* CHARTS */}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <SalesOverviewChart />
-          <CategoryDistributionChart />
-          <SalesChannelChart />
+          <MonthChart chartData={salesData} />
+          <PieGraph pieChartData={categoryData} />
+          <SalesChart salesChartData={salesChartsInfo} />
         </div>
       </main>
     </div>
