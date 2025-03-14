@@ -12,12 +12,31 @@ export interface SidebarItems {
   path: string;
 }
 
-export interface SalesData {
+// Month interfaces
+export interface MonthSalesData {
   name: string;
   sales: number;
 }
 
-export interface CategorySalesData {
+export interface MonthSalesChartProps {
+  chartData: MonthSalesData[];
+}
+
+//SalesGraphData
+export interface MonthStatsChartData {
   name: string;
   value: number;
+}
+
+export interface MonthStatsChart {
+  salesChartData: MonthStatsChartData[];
+}
+//Pie Graph
+export interface IPieChart {
+  name: string;
+  value: number;
+}
+
+export interface PieChartDataProps {
+  pieChartData: IPieChart[]
 }
