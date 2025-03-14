@@ -6,7 +6,11 @@ import Header from "../components/common/Header";
 import { StatsCard } from "../shared-types";
 
 import { AlertTriangle, DollarSign, Package, TrendingUp } from "lucide-react";
-import ProductTable from "../components/products/ProductTable";
+import ProductTable from "../components/products/ProductsTable";
+import PieGraph from "../components/charts/PieGraph";
+import MonthChart from "../components/charts/MonthChart";
+
+import { salesData, categoryData } from "../data/HomePageChartsData"
 
 const STATS_CARD: StatsCard[] = [
   { name: "Total Product", icon: Package, value: "1234", color: "#6366F1" },
@@ -53,7 +57,8 @@ const ProductsPage = () => {
 
         {/* CHARTS */}
         <div className="grid grid-cols-1 lg:grid-cols-2">
-
+        <MonthChart chartData={salesData} />
+        <PieGraph pieChartData={categoryData} />
         </div>
       </main>
     </div>
