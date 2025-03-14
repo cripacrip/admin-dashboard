@@ -1,23 +1,32 @@
 import { motion } from "framer-motion";
 import { Edit, Trash2Icon, SearchIcon } from "lucide-react";
-import { useState, useMemo } from "react";
-import {
-  productTableData,
-  productTableColumnName,
-} from "../../data/PorductPageTableData";
+import { useState, useMemo, useEffect } from "react";
 
-const ProductsTable = () => {
+type TableRow = Record<string, string | number>;
+
+interface TableProps {
+  tableData: TableRow[];
+  tableColumnName: string[];
+}
+
+const Table: React.FC<TableProps> = ({ tableData, tableColumnName }) => {
   const [searchQuery, setSearchProduct] = useState("");
-  const [filterProducts, setFilteredProducts] = useState(productTableData);
+  const [filterProducts, setFilteredProducts] = useState(tableData);
 
-  const searchHandler = (e: any) => {
+  useEffect(() => {
+    setFilteredProducts(tableData);
+  }, [tableData]);
+
+  const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value.toLowerCase();
     setSearchProduct(term);
 
-    const filtered = productTableData.filter(
-      (product) =>
-        product.name.toLowerCase().includes(term) ||
-        product.category.toLowerCase().includes(term)
+    const filtered = tableData.filter(
+      (product) => {
+        const name = (product.name as string).toLowerCase()
+        const category = (product.category as string).toLowerCase()
+        return name.includes(term) || category.includes(term);
+      }
     );
     setFilteredProducts(filtered);
   };
@@ -27,14 +36,14 @@ const ProductsTable = () => {
       const { id, ...rowData } = item;
       return (
         <motion.tr
-          key={item.id}
+          key={id as number}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
           {Object.values(rowData).map((value) => (
             <td
-              key={id}
+              key={id as number}
               className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100"
             >
               {value}
@@ -78,7 +87,7 @@ const ProductsTable = () => {
         <table className="min-w-full divide-y divide-gray-700">
           <thead>
             <tr>
-              {productTableColumnName.map((item) => (
+              {tableColumnName.map((item) => (
                 <th
                   key={item}
                   className="px-6 py-3 text-left font-medium text-gray-400 uppercase tracking-wider"
@@ -95,4 +104,4 @@ const ProductsTable = () => {
   );
 };
 
-export default ProductsTable;
+export default Table;
