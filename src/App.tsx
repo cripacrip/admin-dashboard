@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import HomePage from "./pages/HomePage"
 import ProductsPage from "./pages/ProductsPage"
 import Sidebar from "./components/Sidebar"
+import UsersPage from "./pages/UsersPage"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/products' element={<ProductsPage />} />
+        <Route path='/users' element={<UsersPage />} />
       </Routes>
     </div>
   )

@@ -1,9 +1,13 @@
 export interface StatsCard {
   name: string;
   icon: React.ComponentType<React.SVGProps<SVGSVGElement> & { size?: number }>;
-  value: string;
+  value: string | number;
   color: string;
 }
+
+export type StatsCardGroupProps = {
+  statsCard: StatsCard[];
+};
 
 export interface SidebarItems {
   name: string;
